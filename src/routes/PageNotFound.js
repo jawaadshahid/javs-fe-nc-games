@@ -1,7 +1,13 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function PageNotFound() {
-  return <div></div>;
+  return (
+    <div>
+      <h2>404 - Not Found!</h2>
+      <Link to="/">Go Home</Link>
+    </div>
+  );
 }
 
 export default PageNotFound;

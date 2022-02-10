@@ -1,20 +1,28 @@
 import React, { useContext, useState } from "react";
+import { LoadContext } from "../contexts/Load";
 import { UserContext } from "../contexts/User";
 import { getUserByUsername } from "../utils/api";
 
-export default function LoginForm() {
+function LoginForm() {
   const { user, setUser } = useContext(UserContext);
   const [userInput, setUserInput] = useState(user.username);
+  const { setIsLoading } = useContext(LoadContext);
   const onLoginSubmit = (event) => {
     event.preventDefault();
+    // early return if inputted username already set to global
+    // TODO: move logic to enable/disable submit
+    if (userInput === user.username) return;
     // if user exists then set context
+    setIsLoading(true);
     getUserByUsername(userInput)
       .then((userObj) => {
         setUser(userObj);
+        setIsLoading(false);
       })
       .catch((msg) => {
         // TODO: handle error
         console.log(msg);
+        setIsLoading(false);
       });
   };
   const onInputChange = (event) => {
@@ -31,3 +39,5 @@ export default function LoginForm() {
     </form>
   );
 }
+
+export default LoginForm;

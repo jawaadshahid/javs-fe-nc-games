@@ -4,20 +4,32 @@ const gamesApi = axios.create({
   baseURL: "https://javs-nc-games.herokuapp.com/api",
 });
 
-export const getReviews = () => {
-  return gamesApi.get(`/reviews`).then(({ data }) => data.reviews);
+export const getReviews = (category, order, sort_by) => {
+  return gamesApi
+    .get(`/reviews`, { params: { category, order, sort_by } })
+    .then(({ data }) => data.reviews)
+    .catch(({ response }) => Promise.reject(response.data.msg));
 };
 
 export const getReviewById = (reviewId) => {
-  return gamesApi.get(`/reviews/${reviewId}`).then(({ data }) => data.review);
+  return gamesApi
+    .get(`/reviews/${reviewId}`)
+    .then(({ data }) => data.review)
+    .catch(({ response }) => Promise.reject(response.data.msg));
 };
 
 export const getCategories = () => {
-  return gamesApi.get(`/categories`).then(({ data }) => data.categories);
+  return gamesApi
+    .get(`/categories`)
+    .then(({ data }) => data.categories)
+    .catch(({ response }) => Promise.reject(response.data.msg));
 };
 
 export const getUsers = () => {
-  return gamesApi.get(`/users`).then(({ data }) => data.users);
+  return gamesApi
+    .get(`/users`)
+    .then(({ data }) => data.users)
+    .catch(({ response }) => Promise.reject(response.data.msg));
 };
 
 export const getUserByUsername = (username) => {
@@ -30,5 +42,14 @@ export const getUserByUsername = (username) => {
 export const getCommentsByReviewId = (reviewId) => {
   return gamesApi
     .get(`/reviews/${reviewId}/comments`)
-    .then(({ data }) => data.comments);
+    .then(({ data }) => data.comments)
+    .catch(({ response }) => Promise.reject(response.data.msg));
+};
+
+// commentObj = { username: String, body: String }
+export const postCommentsByReviewId = (reviewId, commentObj) => {
+  return gamesApi
+    .post(`/reviews/${reviewId}/comments`, commentObj)
+    .then(({ data }) => data.comment)
+    .catch(({ response }) => Promise.reject(response.data.msg));
 };
