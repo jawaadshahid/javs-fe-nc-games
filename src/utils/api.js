@@ -46,8 +46,23 @@ export const getCommentsByReviewId = (reviewId) => {
     .catch(({ response }) => Promise.reject(response.data.msg));
 };
 
+// countObj = { inc_votes : int }
+export const patchCommentByCommentId = (commentId, countObj) => {
+  return gamesApi
+    .patch(`/comments/${commentId}`, countObj)
+    .then(({ data }) => data.comment)
+    .catch(({ response }) => Promise.reject(response.data.msg));
+};
+
+export const deleteCommentByCommentId = (commentId) => {
+  return gamesApi
+    .delete(`/comments/${commentId}`)
+    .then(({ data }) => data.comment)
+    .catch(({ response }) => Promise.reject(response.data.msg));
+};
+
 // commentObj = { username: String, body: String }
-export const postCommentsByReviewId = (reviewId, commentObj) => {
+export const postCommentByReviewId = (reviewId, commentObj) => {
   return gamesApi
     .post(`/reviews/${reviewId}/comments`, commentObj)
     .then(({ data }) => data.comment)
