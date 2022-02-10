@@ -8,6 +8,7 @@ function CommentsForm({ addNewComment }) {
   const onCommentFormSubmit = (event) => {
     event.preventDefault();
     addNewComment(inputComment);
+    setInputComment("");
   };
   return (
     <div className="commentsform">
