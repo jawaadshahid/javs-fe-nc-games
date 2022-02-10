@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { LoadContext } from "../contexts/Load";
 import { UserContext } from "../contexts/User";
-import { getCommentsByReviewId, postCommentsByReviewId } from "../utils/api";
+import { getCommentsByReviewId, postCommentByReviewId } from "../utils/api";
 import CommentCard from "./CommentCard";
 import CommentsForm from "./CommentsForm";
 
@@ -18,7 +18,7 @@ function Comments({ reviewId }) {
   const addNewComment = (commentBody) => {
     const newComment = { username: user.username, body: commentBody };
     setIsLoading(true);
-    postCommentsByReviewId(reviewId, newComment)
+    postCommentByReviewId(reviewId, newComment)
       .then((comment) => {
         setComments((currComments) => {
           return [...currComments, comment];
