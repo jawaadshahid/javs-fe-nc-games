@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import { LoadContext } from "../contexts/Load";
-import { UserContext } from "../contexts/User";
+import { CurrentUserContext } from "../contexts/CurrentUser";
 import { getCommentsByReviewId, postCommentByReviewId } from "../utils/api";
 import CommentCard from "./CommentCard";
 import CommentsForm from "./CommentsForm";
 
 function Comments({ reviewId }) {
   const [comments, setComments] = useState([]);
-  const { user } = useContext(UserContext);
+  const { currentUser } = useContext(CurrentUserContext);
   const { setIsLoading } = useContext(LoadContext);
   useEffect(() => {
     getCommentsByReviewId(reviewId)
@@ -16,7 +16,7 @@ function Comments({ reviewId }) {
   }, [reviewId]);
 
   const addNewComment = (commentBody) => {
-    const newComment = { username: user.username, body: commentBody };
+    const newComment = { username: currentUser.username, body: commentBody };
     setIsLoading(true);
     postCommentByReviewId(reviewId, newComment)
       .then((comment) => {

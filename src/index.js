@@ -2,14 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from "./App";
-import { UserProvider } from "./contexts/User";
 import { LoadProvider } from "./contexts/Load";
+import { CurrentUserProvider } from "./contexts/CurrentUser";
 
 ReactDOM.render(
   <LoadProvider>
-    <UserProvider>
+    <CurrentUserProvider>
       <App />
-    </UserProvider>
+    </CurrentUserProvider>
   </LoadProvider>,
   document.getElementById("root")
 );
