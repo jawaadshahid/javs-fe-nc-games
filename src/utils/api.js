@@ -18,6 +18,14 @@ export const getReviewById = (reviewId) => {
     .catch(({ response }) => Promise.reject(response.data.msg));
 };
 
+// countObj = { inc_votes : int }
+export const patchReviewByReviewId = (reviewId, countObj) => {
+  return gamesApi
+    .patch(`/reviews/${reviewId}`, countObj)
+    .then(({ data }) => data.review)
+    .catch(({ response }) => Promise.reject(response.data.msg));
+};
+
 export const getCategories = () => {
   return gamesApi
     .get(`/categories`)
