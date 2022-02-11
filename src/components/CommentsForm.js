@@ -18,6 +18,7 @@ function CommentsForm({ addNewComment }) {
           rows="5"
           placeholder="Enter your comment here..."
           value={inputComment}
+          required
           onChange={onCommentChange}
           style={{ width: "100%", resize: "none" }}
         />
