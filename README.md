@@ -10,6 +10,6 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Useful links
 
- - [Hosted version](https://google.com).
+ - [Hosted version](https://google.com)
  - [Back-end repo](https://github.com/jawaadshahid/javs_nc_games)
  - [Back-end api](https://javs-nc-games.herokuapp.com/api)
