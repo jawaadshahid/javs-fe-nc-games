@@ -5,7 +5,7 @@ import Vote from "./Vote";
 
 function CommentCard({ commentData }) {
   const { comment_id, author, created_at, body } = commentData;
-  const [votes, setVotes] = useState(commentData.votes);
+  const [votes, setVotes] = useState(parseInt(commentData.votes));
   const [commentingUser, setCommentingUser] = useState({});
   useEffect(() => {
     getUserByUsername(author).then((user) => setCommentingUser(user));
