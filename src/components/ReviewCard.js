@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { patchReviewByReviewId } from "../utils/api";
 import { formattedDateStr } from "../utils/date";
 import "./ReviewCard.css";
@@ -15,7 +15,12 @@ function ReviewCard({ reviewData }) {
     comment_count,
   } = reviewData;
 
-  const [votes, setVotes] = useState(parseInt(reviewData.votes));
+  const [votes, setVotes] = useState(0);
+
+  // had to do this because of occasional NaN
+  useEffect(() => {
+    setVotes(parseInt(reviewData.votes));
+  }, [reviewData]);
 
   const incVotes = (inc_votes) => {
     // optmistic render

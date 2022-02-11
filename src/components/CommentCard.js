@@ -3,10 +3,14 @@ import { getUserByUsername, patchCommentByCommentId } from "../utils/api";
 import { formattedDateStr } from "../utils/date";
 import Vote from "./Vote";
 
-function CommentCard({ commentData }) {
+function CommentCard({ commentData, deleteComment }) {
   const { comment_id, author, created_at, body } = commentData;
-  const [votes, setVotes] = useState(parseInt(commentData.votes));
   const [commentingUser, setCommentingUser] = useState({});
+  const [votes, setVotes] = useState(0);
+  // had to do this because of occasional NaN
+  useEffect(() => {
+    setVotes(parseInt(commentData.votes));
+  }, [commentData]);
   useEffect(() => {
     getUserByUsername(author).then((user) => setCommentingUser(user));
   }, [author]);
@@ -33,6 +37,17 @@ function CommentCard({ commentData }) {
       </p>
       <p>{body}</p>
       <div>votes: {<Vote votes={votes} incVotes={incVotes} />}</div>
+      {deleteComment ? (
+        <button
+          onClick={() => {
+            deleteComment(comment_id);
+          }}
+        >
+          X
+        </button>
+      ) : (
+        <></>
+      )}
     </div>
   );
 }
