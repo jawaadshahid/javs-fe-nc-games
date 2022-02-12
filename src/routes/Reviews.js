@@ -35,6 +35,7 @@ function Reviews() {
         categories={categories}
         category={category}
         setCategory={setCategory}
+        sortby={sortby}
         setSortby={setSortby}
       />
       {reviews.map((review) => {
